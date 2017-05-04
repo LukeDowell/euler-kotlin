@@ -12,8 +12,8 @@ object `7TenThousandAndFirstPrime` {
         
         println(primes)
         println(primes.size)
-        println(primes[10_001])
-    }
+        println(primes[10_000])
+     }
     
     /**
      *
@@ -23,8 +23,10 @@ object `7TenThousandAndFirstPrime` {
      */
     tailrec fun sieveOfEratosthenes(prime: Int = 2, list: MutableList<Pair<Int, Boolean>>) : List<Int> {
         // Iterate and mark all multiples of p
-        for (i in (list.indexOfFirst { it.first == prime }..list.size - 1) step prime)
-            list[i] = Pair(list[i].first, false)
+        val startingIndex = list.indexOfFirst { it.first == prime }
+        (startingIndex..list.size - 1 step prime)
+                .filter { list[it].first != prime }
+                .forEach { list[it] = Pair(list[it].first, false) }
         
         // Find the next prime greater than p
         val nextPrime: Int? = list.firstOrNull { it.first > prime && it.second }?.first
