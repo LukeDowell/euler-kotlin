@@ -29,13 +29,12 @@ object `7TenThousandAndFirstPrime` {
         // Find the next prime greater than p
         val nextPrime: Int? = list.firstOrNull { it.first > prime && it.second }?.first
         
-        // Return if the value is null or if nextPrime squared is greater than list size
+        // Return if the value is null or if nextPrime squared is greater than the biggest number in the list
         if (nextPrime == null || (nextPrime * nextPrime) > list[list.size - 1].first) {
             return list.filter { it.second }
                     .map { it.first }
         }
         
-        // Recurse
         return sieveOfEratosthenes(nextPrime, list)
     }
 }
