@@ -10,8 +10,6 @@ object `7TenThousandAndFirstPrime` {
         
         val primes = sieveOfEratosthenes(list = intList)
         
-        println(primes)
-        println(primes.size)
         println(primes[10_000])
      }
     
