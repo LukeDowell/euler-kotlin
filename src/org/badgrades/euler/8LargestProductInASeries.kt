@@ -1,6 +1,7 @@
 package org.badgrades.euler
 
 import java.io.File
+import java.math.BigInteger
 import java.util.*
 
 object `8LargestProductInASeries` {
@@ -10,7 +11,7 @@ object `8LargestProductInASeries` {
     
     @JvmStatic
     fun main(args: Array<String>) {
-        val answer = (0..input.length - size)
+        val answer = (0..input.length)
                 .map { calcAdjacent(index = it) }
                 .sortedDescending()
         
@@ -18,15 +19,15 @@ object `8LargestProductInASeries` {
         println(answer)
     }
     
-    fun calcAdjacent(string: String = input, index: Int, adjacentNumbers: Int = size) : Int {
-        return (index..index + adjacentNumbers)
+    fun calcAdjacent(string: String = input, index: Int, adjacentNumbers: Int = size) : BigInteger {
+        return (index..(index + adjacentNumbers - 1))
                 .map {
                     try {
-                        Integer.parseInt(string[it].toString())
+                        BigInteger(string[it].toString())
                     } catch (e: StringIndexOutOfBoundsException) {
-                        1
+                        BigInteger.ONE
                     }
                 }
-                .reduce { a, b -> a * b }
+                .reduce { a, b -> a.multiply(b) }
     }
 }
